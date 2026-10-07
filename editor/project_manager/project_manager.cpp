@@ -112,7 +112,11 @@ void ProjectManager::_notification(int p_what) {
 
 		case NOTIFICATION_TRANSLATION_CHANGED: {
 			// TRANSLATORS: This refers to the application where users manage their Godot projects.
+#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
+			SceneTree::get_singleton()->get_root()->set_title(String("CBT Content Studio — POC - ") + TTR("Project Manager", "Application"));
+#else
 			SceneTree::get_singleton()->get_root()->set_title(GODOT_VERSION_NAME + String(" - ") + TTR("Project Manager", "Application"));
+#endif
 
 			const String line1 = TTR("You don't have any projects yet.");
 			const String line2 = TTR("Get started by creating a new one,\nimporting one that exists, or by downloading a project template from the Asset Library!");
