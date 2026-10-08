@@ -9,10 +9,10 @@
 #include "scene/gui/box_container.h"
 #include "scene/gui/button.h"
 #include "scene/gui/label.h"
+#include "scene/gui/line_edit.h"
 #include "scene/gui/panel_container.h"
+#include "scene/gui/scroll_container.h"
 #include "scene/gui/split_container.h"
-#include "scene/gui/menu_bar.h"
-#include "scene/gui/popup_menu.h"
 
 class EditorNode;
 
@@ -65,8 +65,8 @@ private:
 
 	EditorNode *editor_node = nullptr;
 
-	DomainId active_domain = DOMAIN_CONTENT;
-	ViewId active_view = VIEW_SCENES;
+	DomainId active_domain = DOMAIN_AUTHORING;
+	ViewId active_view = VIEW_PRODUCTS;
 
 	// Row 1: App Menu + Domains + Utilities
 	HBoxContainer *row1_app_bar = nullptr;
@@ -102,22 +102,26 @@ private:
 	PanelContainer *center_panel_container = nullptr;
 	PanelContainer *right_panel_container = nullptr;
 
-	// Contextual Left Panel views
-	Control *scene_tree_dock_ref = nullptr;
+	// Column 1: Left Catalog / Collection
 	VBoxContainer *domain_left_nav = nullptr;
 	Label *domain_left_title = nullptr;
+	LineEdit *left_search_box = nullptr;
+	ScrollContainer *left_scroll = nullptr;
 	VBoxContainer *domain_left_items = nullptr;
 
-	// Center Workspace views
-	Control *editor_3d_viewport_ref = nullptr;
+	// Column 2: Center Workspace
 	VBoxContainer *domain_center_view = nullptr;
 	Label *domain_center_title = nullptr;
 	Label *domain_center_desc = nullptr;
+	HBoxContainer *center_action_toolbar = nullptr;
+	ScrollContainer *center_cards_scroll = nullptr;
+	VBoxContainer *center_cards_vbox = nullptr;
 
-	// Right Inspector views
-	Control *inspector_dock_ref = nullptr;
+	// Column 3: Right Inspector
 	VBoxContainer *domain_right_inspector = nullptr;
 	Label *domain_right_title = nullptr;
+	ScrollContainer *inspector_scroll = nullptr;
+	VBoxContainer *inspector_fields_vbox = nullptr;
 
 	// Project Launcher Overlay
 	CbtProjectLauncher *launcher_overlay = nullptr;
@@ -128,6 +132,8 @@ private:
 
 	void _update_domain_selection(DomainId p_domain);
 	void _update_view_selection(ViewId p_view, bool p_record_history = true);
+	void _populate_view_data(ViewId p_view);
+	void _select_catalog_item(const String &p_name, const String &p_id, const String &p_category, const String &p_status, const String &p_desc);
 
 	void _on_domain_tab_pressed(int p_domain);
 	void _on_destination_tab_pressed(int p_view);
@@ -153,10 +159,14 @@ public:
 
 	void initialize_with_editor(EditorNode *p_editor);
 	void set_project_name(const String &p_name);
-	void switch_to_domain(DomainId p_domain);
-	void switch_to_view(ViewId p_view);
+	void switch_to_domain(int p_domain);
+	void switch_to_view(int p_view);
 	void show_project_launcher();
 	void hide_project_launcher();
+	void on_main_screen_activated();
+
+	DomainId get_active_domain() const { return active_domain; }
+	ViewId get_active_view() const { return active_view; }
 
 	CbtApplicationShell();
 	~CbtApplicationShell();
