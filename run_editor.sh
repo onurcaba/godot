@@ -11,12 +11,15 @@ if [ ! -f "$EDITOR_BIN" ]; then
     exit 1
 fi
 
-# Eğer bir argüman verilmediyse doğrudan POC projesini editörde açar
+# If no arguments provided, launch the CBT Project Launcher
 if [ $# -eq 0 ]; then
-    echo "CBT Content Studio (POC) başlatılıyor..."
+    echo "CBT Content Studio Launcher başlatılıyor..."
+    "$EDITOR_BIN"
+elif [ "$1" == "--poc" ]; then
+    echo "CBT Content Studio (POC Projesi) başlatılıyor..."
     echo "Proje: $POC_PROJECT_DIR"
     "$EDITOR_BIN" --path "$POC_PROJECT_DIR" -e
 else
-    # Argüman verildiyse (örn: --help, veya başka proje yolu) iletir
+    # Forward arguments (e.g. --path <path> -e, --help, etc.)
     "$EDITOR_BIN" "$@"
 fi

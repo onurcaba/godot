@@ -29,6 +29,9 @@
 /**************************************************************************/
 
 #include "project_manager.h"
+#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
+#include "modules/cbt_studio/cbt_project_launcher.h"
+#endif
 
 #include "core/config/project_settings.h"
 #include "core/io/config_file.h"
@@ -1976,6 +1979,17 @@ ProjectManager::ProjectManager() {
 	}
 
 	_update_size_limits();
+
+#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
+	CbtProjectLauncher *launcher = memnew(CbtProjectLauncher);
+	add_child(launcher);
+	launcher->set_anchors_and_offsets_preset(Control::PRESET_FULL_RECT);
+	launcher->set_standalone_mode(true);
+	cbt_launcher = launcher;
+	if (main_vbox) {
+		main_vbox->set_visible(false);
+	}
+#endif
 }
 
 ProjectManager::~ProjectManager() {
