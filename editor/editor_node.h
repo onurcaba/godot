@@ -78,9 +78,6 @@ class EditorExportPreset;
 class EditorFeatureProfileManager;
 class EditorFileDialog;
 class EditorFolding;
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-class CbtApplicationShell;
-#endif
 class EditorLayoutsDialog;
 class EditorLog;
 class EditorMainScreen;
@@ -307,9 +304,6 @@ private:
 	DockSplitContainer *right_l_vsplit = nullptr;
 	DockSplitContainer *right_r_vsplit = nullptr;
 	DockSplitContainer *center_split = nullptr;
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	CbtApplicationShell *cbt_shell = nullptr;
-#endif
 
 	// Main tabs.
 	EditorSceneTabs *scene_tabs = nullptr;
@@ -982,10 +976,6 @@ public:
 	bool is_project_exporting() const;
 
 	Control *get_gui_base() { return gui_base; }
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	DockSplitContainer *get_dock_main_hsplit() const { return main_hsplit; }
-	CbtApplicationShell *get_cbt_shell() const { return cbt_shell; }
-#endif
 
 	void save_scene_to_path(String p_file, bool p_with_preview = true) {
 		if (p_with_preview) {

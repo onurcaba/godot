@@ -29,9 +29,6 @@
 /**************************************************************************/
 
 #include "editor_node.h"
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-#include "modules/cbt_studio/cbt_shell.h"
-#endif
 
 #include "core/config/project_settings.h"
 #include "core/extension/gdextension_manager.h"
@@ -8531,11 +8528,6 @@ EditorNode::EditorNode() {
 	main_vbox->add_child(title_bar);
 #endif
 
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	cbt_shell = memnew(CbtApplicationShell);
-	main_vbox->add_child(cbt_shell);
-#endif
-
 	main_hsplit = memnew(DockSplitContainer);
 	main_hsplit->set_name("DockHSplitMain");
 	main_hsplit->set_v_size_flags(Control::SIZE_EXPAND_FILL);
@@ -8871,9 +8863,6 @@ EditorNode::EditorNode() {
 	editor_main_screen->set_button_container(main_editor_button_hb);
 	title_bar->add_child(main_editor_button_hb);
 	title_bar->set_center_control(main_editor_button_hb);
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	main_editor_button_hb->set_visible(false);
-#endif
 
 	// Spacer to center 2D / 3D / Script buttons.
 	right_spacer = memnew(Control);
@@ -9406,10 +9395,6 @@ EditorNode::EditorNode() {
 
 	follow_system_theme = EDITOR_GET("interface/theme/follow_system_theme");
 	use_system_accent_color = EDITOR_GET("interface/theme/use_system_accent_color");
-
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	cbt_shell->initialize_with_editor(this);
-#endif
 }
 
 EditorNode::~EditorNode() {

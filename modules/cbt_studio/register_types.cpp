@@ -11,7 +11,7 @@ void initialize_cbt_studio_module(ModuleInitializationLevel p_level) {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
 		GDREGISTER_CLASS(CbtProjectLauncher);
 		GDREGISTER_CLASS(CbtApplicationShell);
-		print_line("[CBT Content Studio] Initializing CBT Content Studio Application Shell & Launcher (M1)...");
+		print_line("[CBT Content Studio] Initializing CBT Content Studio Module...");
 	}
 }
 

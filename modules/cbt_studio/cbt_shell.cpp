@@ -445,9 +445,6 @@ void CbtApplicationShell::_update_view_selection(ViewId p_view, bool p_record_hi
 	if (is_scene_view) {
 		workspace_main_hsplit->set_visible(false);
 		set_v_size_flags(Control::SIZE_SHRINK_BEGIN);
-		if (editor_node && editor_node->get_dock_main_hsplit()) {
-			editor_node->get_dock_main_hsplit()->set_visible(true);
-		}
 		if (EditorNode::get_editor_main_screen()) {
 			EditorNode::get_editor_main_screen()->select(EditorMainScreen::EDITOR_3D);
 		}
@@ -463,9 +460,6 @@ void CbtApplicationShell::_update_view_selection(ViewId p_view, bool p_record_hi
 			InspectorDock::get_singleton()->show();
 		}
 	} else {
-		if (editor_node && editor_node->get_dock_main_hsplit()) {
-			editor_node->get_dock_main_hsplit()->set_visible(false);
-		}
 		set_v_size_flags(Control::SIZE_EXPAND_FILL);
 		workspace_main_hsplit->set_visible(true);
 		workspace_main_hsplit->set_v_size_flags(Control::SIZE_EXPAND_FILL);

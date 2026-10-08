@@ -84,9 +84,6 @@ class ProjectManager : public Control {
 	MarginContainer *root_container = nullptr;
 	Panel *background_panel = nullptr;
 	VBoxContainer *main_vbox = nullptr;
-#if defined(CBT_STUDIO) || defined(MODULE_CBT_STUDIO_ENABLED)
-	Control *cbt_launcher = nullptr;
-#endif
 
 	EditorTitleBar *title_bar = nullptr;
 	Control *left_menu_spacer = nullptr;
